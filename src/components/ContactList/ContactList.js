@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { phonebookOperations, phonebookSelectors } from "redux/phonebook";
 import ContactItem from "./ContactItem";
 
-const ContactItem = () => {
+const ContactList = () => {
     const phonebook = useSelector(phonebookSelectors.getVisibleContacts);
     const dispatch = useDispatch();
 
