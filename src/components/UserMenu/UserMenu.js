@@ -9,7 +9,7 @@ export default function UserMenu() {
     <Wrapper>
       <Thumb>
         <Avatar
-          src={`https://eu.ui-avatars.com/api/?background=2196f3&color=fff&length=1&name=${name}`}
+          src={`https://eu.ui-avatars.com/api/?background=2196f3&color=fff&length=1&name=$%7Bname%7D`}
           alt="avatar"
           title="Your avatar"
         />
