@@ -9,21 +9,21 @@ import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import { Container } from "./App.styled";
 
-const HomeView = lazy (()=> import('views/HomeView/HomeView'));
-const LoginView = lazy (()=> import('views/LoginView/LoginView'));
-const RegisterView = lazy (()=> import('views/RegisterView/RegisterView'));
-const ContactsView = lazy (()=> import('views/ContactsView/ContactsView'));
+const HomeView = lazy(() => import('views/HomeView/HomeView'));
+const LoginView = lazy(() => import('views/LoginView/LoginView'));
+const RegisterView = lazy(() => import('views/RegisterView/RegisterView'));
+const ContactsView = lazy(() => import('views/ContactsView/ContactsView'));
 
 export default function App() {
   const dispatch = useDispatch();
-  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent)
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
-  useEffect(()=> {
-    dispatch(authOperations.fetchCurrentUser())
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
-return (
-  <Container>
+  return (
+    <Container>
       {isFetchingCurrentUser ? (
         <h1>Loading....</h1>
       ) : (

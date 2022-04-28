@@ -4,12 +4,12 @@ import ContactList from "components/ContactList/ContactList";
 import { Title } from "./ContactsView.styled";
 
 export default function ContactsView() {
-    return (
-      <>
-        <Title>Contacts</Title>
-        <ContactForm />
-        <Filter />
-        <ContactList />
-      </>
-    );
-  }
+  return (
+    <>
+      <Title>Contacts</Title>
+      <ContactForm />
+      <Filter />
+      <ContactList />
+    </>
+  );
+}
