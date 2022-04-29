@@ -7,7 +7,9 @@ const ContactList = () => {
   const phonebook = useSelector(phonebookSelectors.getVisibleContacts);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(phonebookOperations.getContacts()), [dispatch]);
+  useEffect(() => {
+    dispatch(phonebookOperations.getContacts());
+  }, [dispatch]);
 
   return (
     <ul>
