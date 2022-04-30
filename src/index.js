@@ -9,14 +9,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import  App from 'components/App';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-        <React.StrictMode>
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-        </React.StrictMode>
-    </PersistGate>
-  </Provider>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
