@@ -1,12 +1,11 @@
 
-import { Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { useEffect, Suspense, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { authOperations, authSelectors } from "redux/auth";
 import AppBar from "./AppBar/AppBar";
-import PublicRoute from "./PublicRoute";
-import PrivateRoute from "./PrivateRoute";
+
 import { Container } from "./App.styled";
 
 const HomeView = lazy(() => import('views/HomeView/HomeView'));
@@ -15,6 +14,7 @@ const RegisterView = lazy(() => import('views/RegisterView/RegisterView'));
 const ContactsView = lazy(() => import('views/ContactsView/ContactsView'));
 
 export default function App() {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   const dispatch = useDispatch();
   const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
@@ -29,28 +29,33 @@ export default function App() {
       ) : (
         <>
           <AppBar />
-
+          <Suspense fallback={<h1>Loading....</h1>}>
           <Routes>
-            <Suspense fallback={<h1>Loading....</h1>}>
-              <PublicRoute exact path="/">
-                <HomeView />
-              </PublicRoute>
-              <PublicRoute
-                exact
+              <Route path="/" element={<HomeView />} />
+              <Route
+                path="/register"
+                restricted
+                element={
+                  !isLoggedIn ? <RegisterView /> : <Navigate to="/contacts" />
+                }
+              />
+              <Route
                 path="/login"
                 redirectTo="/contacts"
                 restricted
-              >
-                <LoginView />
-              </PublicRoute>
-              <PublicRoute exact path="/register" restricted>
-                <RegisterView />
-              </PublicRoute>
-              <PrivateRoute path="/contacts" redirectTo="/login">
-                <ContactsView />
-              </PrivateRoute>
-            </Suspense>
-          </Routes>
+                element={
+                  !isLoggedIn ? <LoginView /> : <Navigate to="/contacts" />
+                }
+              />
+              <Route
+                path="/contacts"
+                redirectTo="/login"
+                element={
+                  isLoggedIn ? <ContactsView /> : <Navigate to="/login" />
+                }
+              />
+            </Routes>
+          </Suspense>
         </>
       )}
       <ToastContainer autoClose={3000} />
