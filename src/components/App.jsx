@@ -1,5 +1,5 @@
 
-import { Switch } from "react-router-dom";
+import { Routes } from "react-router-dom";
 import { useEffect, Suspense, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -30,7 +30,7 @@ export default function App() {
         <>
           <AppBar />
 
-          <Switch>
+          <Routes>
             <Suspense fallback={<h1>Loading....</h1>}>
               <PublicRoute exact path="/">
                 <HomeView />
@@ -50,7 +50,7 @@ export default function App() {
                 <ContactsView />
               </PrivateRoute>
             </Suspense>
-          </Switch>
+          </Routes>
         </>
       )}
       <ToastContainer autoClose={3000} />
